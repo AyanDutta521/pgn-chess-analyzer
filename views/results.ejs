@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <style>
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+th {
+    background: #eee;
+}
+
+tr:nth-child(even) {
+    background: #f5f5f5;
+}
+</style>
+</head>
+
+<body>
+    <h1>Welcome to Chess Analyser</h1>
+    <button onclick="window.location.href='/'">Back to Home</button>
+
+    <% if (headers.Date) { %>
+        <p>Date: <%= headers.Date %></p>
+    <% } %>
+
+    <% if (headers.White) { %>
+        <p>White Player: <%= headers.White %> (<%= headers.WhiteElo%>)</p>
+    <% } %>
+
+    <% if (headers.Black) { %>
+        <p>Black Player: <%= headers.Black %> (<%= headers.BlackElo%>)</p>
+    <% } %>
+
+    <% if (headers.Result) { %>
+        <p>Result: <%= headers.Result %> (<%= headers.Termination%>)</p>
+    <% } %>
+       
+    <table>
+        <thead>
+            <th>Move No.</th>
+            <th>Best Move</th>
+            <th>User Move</th>
+            <th>Evaluation</th>
+            <th>Comment</th>
+        </thead>
+        <tbody>
+            <% positions.forEach((position, index)=> { %>
+                <tr>
+                    <td>
+                        <%= index + 1 %>
+                    </td>
+                    <td>
+                        <%= position.bestMove %>
+                    </td>
+                    <td>
+                        <%= position.move %>
+                    </td>
+                    <td>
+                        <% if(position.result.type === "cp") { %>
+                            <%= (position.result.value / 100).toFixed(2) %>
+                        <% } else { %>
+                                Mate in <%= position.result.value %>
+                        <% } %>
+                    </td>
+                    <td>
+                        <%= position.comment %>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+
+</body>
+
+</html>
