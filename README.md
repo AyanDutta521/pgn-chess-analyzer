@@ -8,11 +8,9 @@ npm install
 
 3. Download Stockfish separately from official source
 
-:contentReference[oaicite:1]{index=1}
-
 4. Place the executable inside:
 
-/stockfish/
+/stockfish/<executable>
 
 5. Run
 
